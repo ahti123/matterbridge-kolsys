@@ -1,12 +1,9 @@
 name: docker
 
+# Disabled — inherited from upstream, not needed in this fork
 on:
-  push:
-    branches:
-      - 'master'
-    tags:
-      - 'v*'
-  pull_request:
+  workflow_dispatch:
+  _disabled:
     branches:
       - 'master'
 

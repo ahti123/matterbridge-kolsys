@@ -1,5 +1,8 @@
 name: Development
-on: [push, pull_request]
+
+# Disabled — inherited from upstream, not needed in this fork
+on:
+  workflow_dispatch:
 jobs:
   lint:
     name: golangci-lint

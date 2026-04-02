@@ -5,14 +5,9 @@
 # or to provide custom queries or build logic.
 name: "CodeQL"
 
+# Disabled — inherited from upstream, not needed in this fork
 on:
-  push:
-    branches: [master]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [master]
-  schedule:
-    - cron: '0 16 * * 1'
+  workflow_dispatch:
 
 jobs:
   analyze:

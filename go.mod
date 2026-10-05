@@ -10,15 +10,15 @@ require (
 	github.com/d5/tengo/v2 v2.17.0
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
 	github.com/fsnotify/fsnotify v1.7.0
-	github.com/gomarkdown/markdown v0.0.0-20240419095408-642f0ee99ae2
+	github.com/gomarkdown/markdown v0.0.0-20260923180740-94fc73f6b1a3
 	github.com/google/gops v0.3.27
-	github.com/gorilla/schema v1.3.0
+	github.com/gorilla/schema v1.4.1
 	github.com/harmony-development/shibshib v0.0.0-20220101224523-c98059d09cfa
 	github.com/hashicorp/golang-lru v1.0.2
 	github.com/jpillora/backoff v1.0.0
 	github.com/keybase/go-keybase-chat-bot v0.0.0-20221220212439-e48d9abd2c20
 	github.com/kyokomi/emoji/v2 v2.2.13
-	github.com/labstack/echo/v4 v4.12.0
+	github.com/labstack/echo/v4 v4.16.0
 	github.com/lrstanley/girc v0.0.0-20240519163535-a518c5b87a79
 	github.com/matterbridge/Rocket.Chat.Go.SDK v0.0.0-20211016222428-79310a412696
 	github.com/matterbridge/go-xmpp v0.0.0-20240523230155-7154bfeb76e8
@@ -41,17 +41,17 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/slack-go/slack v0.13.0
 	github.com/spf13/viper v1.18.2
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.11.1
 	github.com/vincent-petithory/dataurl v1.0.0
 	github.com/writeas/go-strip-markdown v2.0.1+incompatible
 	github.com/yaegashi/msgraph.go v0.1.4
 	github.com/zfjagann/golang-ring v0.0.0-20220330170733-19bcea1b6289
 	go.mau.fi/whatsmeow v0.0.0-20240520180327-81f8f07f1dfb
-	golang.org/x/image v0.16.0
-	golang.org/x/oauth2 v0.20.0
-	golang.org/x/text v0.15.0
+	golang.org/x/image v0.46.0
+	golang.org/x/oauth2 v0.37.0
+	golang.org/x/text v0.42.0
 	gomod.garykim.dev/nc-talk v0.3.0
-	google.golang.org/protobuf v1.33.0
+	google.golang.org/protobuf v1.36.11
 	layeh.com/gumble v0.0.0-20221205141517-d1df60a3cc14
 	modernc.org/sqlite v1.29.10
 )
@@ -68,7 +68,6 @@ require (
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/francoispqt/gojay v1.2.13 // indirect
 	github.com/go-asn1-ber/asn1-ber v1.5.5 // indirect
-	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gopackage/ddp v0.0.3 // indirect
@@ -82,13 +81,13 @@ require (
 	github.com/hashicorp/yamux v0.1.1 // indirect
 	github.com/kettek/apng v0.0.0-20191108220231-414630eed80f // indirect
 	github.com/klauspost/compress v1.17.7 // indirect
-	github.com/labstack/gommon v0.4.2 // indirect
+	github.com/labstack/gommon v0.5.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattermost/go-i18n v1.11.1-0.20211013152124-5c415071e404 // indirect
 	github.com/mattermost/ldap v0.0.0-20231116144001-0f480c025956 // indirect
 	github.com/mattermost/logr/v2 v2.0.21 // indirect
-	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mattn/go-colorable v0.1.15 // indirect
+	github.com/mattn/go-isatty v0.0.22 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
@@ -127,14 +126,14 @@ require (
 	go.mau.fi/libsignal v0.1.0 // indirect
 	go.mau.fi/util v0.4.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.23.0 // indirect
+	golang.org/x/crypto v0.57.0 // indirect
 	golang.org/x/exp v0.0.0-20240314144324-c7f7c6466f7f // indirect
-	golang.org/x/net v0.25.0 // indirect
-	golang.org/x/sys v0.20.0 // indirect
-	golang.org/x/term v0.20.0 // indirect
-	golang.org/x/time v0.5.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240227224415-6ceb2ff114de // indirect
-	google.golang.org/grpc v1.62.0 // indirect
+	golang.org/x/net v0.59.0 // indirect
+	golang.org/x/sys v0.48.0 // indirect
+	golang.org/x/term v0.46.0 // indirect
+	golang.org/x/time v0.15.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260706201446-f0a921348800 // indirect
+	google.golang.org/grpc v1.84.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
@@ -150,4 +149,4 @@ require (
 
 //replace github.com/matrix-org/gomatrix => github.com/matterbridge/gomatrix v0.0.0-20220205235239-607eb9ee6419
 
-go 1.22.0
+go 1.26.0

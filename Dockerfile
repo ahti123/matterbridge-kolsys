@@ -1,7 +1,7 @@
-FROM alpine AS builder
+FROM golang:alpine AS builder
 
 COPY . /go/src/matterbridge
-RUN apk --no-cache add go git \
+RUN apk --no-cache add git \
         && cd /go/src/matterbridge \
         && CGO_ENABLED=0 go build -mod vendor -ldflags "-X github.com/42wim/matterbridge/version.GitHash=$(git log --pretty=format:'%h' -n 1)" -o /bin/matterbridge
 

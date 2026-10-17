@@ -45,6 +45,8 @@ func TestReplaceURL(t *testing.T) {
 		"label without scheme": {"<http://example.com|example.com>", "http://example.com"},
 		"label trailing slash": {"<http://example.com/|example.com>", "http://example.com/"},
 		"label truncated":      {"retro <https://youtu.be/tAJHwUc3trQ?si=JuA0E2Wb5ANaM4sf|youtu.be/tAJHwUc3trQ?si=…>", "retro https://youtu.be/tAJHwUc3trQ?si=JuA0E2Wb5ANaM4sf"},
+		"label without www":    {"<https://www.youtube.com/watch?v=tAJHwUc3trQ|youtube.com/watch?v=tAJHwUc3trQ>", "https://www.youtube.com/watch?v=tAJHwUc3trQ"},
+		"label with www":       {"<http://www.example.com|www.example.com>", "http://www.example.com"},
 		"mailto":               {"<mailto:foo@example.com|foo@example.com>", "foo@example.com"},
 		"custom label":         {"<https://example.com|the docs>", "[the docs](https://example.com)"},
 		"multiple links":       {"<https://a.com> and <https://b.com|b>", "https://a.com and [b](https://b.com)"},

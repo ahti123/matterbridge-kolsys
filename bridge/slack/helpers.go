@@ -206,7 +206,9 @@ func isURLLabel(url, label string) bool {
 	if label == url {
 		return true
 	}
-	bare := urlSchemeRE.ReplaceAllString(url, "")
+	// Slack drops the scheme and "www." from generated labels
+	bare := strings.TrimPrefix(urlSchemeRE.ReplaceAllString(url, ""), "www.")
+	label = strings.TrimPrefix(label, "www.")
 	if strings.HasSuffix(label, "…") {
 		return strings.HasPrefix(bare, strings.TrimSuffix(label, "…"))
 	}

@@ -34,3 +34,29 @@ func TestExtractTopicOrPurpose(t *testing.T) {
 		assert.Equalf(t, tc.wantOutput, gotOutput, "This testcase failed: %s", name)
 	}
 }
+
+func TestReplaceURL(t *testing.T) {
+	testcases := map[string]struct {
+		input      string
+		wantOutput string
+	}{
+		"bare link":            {"see <https://example.com/a?b=1&amp;c=2>", "see https://example.com/a?b=1&amp;c=2"},
+		"label equals url":     {"<https://example.com|https://example.com>", "https://example.com"},
+		"label without scheme": {"<http://example.com|example.com>", "http://example.com"},
+		"label trailing slash": {"<http://example.com/|example.com>", "http://example.com/"},
+		"label truncated":      {"retro <https://youtu.be/tAJHwUc3trQ?si=JuA0E2Wb5ANaM4sf|youtu.be/tAJHwUc3trQ?si=…>", "retro https://youtu.be/tAJHwUc3trQ?si=JuA0E2Wb5ANaM4sf"},
+		"mailto":               {"<mailto:foo@example.com|foo@example.com>", "foo@example.com"},
+		"custom label":         {"<https://example.com|the docs>", "[the docs](https://example.com)"},
+		"multiple links":       {"<https://a.com> and <https://b.com|b>", "https://a.com and [b](https://b.com)"},
+		"unresolved mention":   {"<@U12345>", "<@U12345>"},
+		"unresolved variable":  {"<!here>", "<!here>"},
+	}
+
+	logger := logrus.New()
+	logger.SetOutput(ioutil.Discard)
+	cfg := &bridge.Config{Bridge: &bridge.Bridge{Log: logrus.NewEntry(logger)}}
+	b := newBridge(cfg)
+	for name, tc := range testcases {
+		assert.Equalf(t, tc.wantOutput, b.replaceURL(tc.input), "This testcase failed: %s", name)
+	}
+}

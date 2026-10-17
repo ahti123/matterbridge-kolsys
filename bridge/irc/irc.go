@@ -7,6 +7,7 @@ import (
 	"hash/crc32"
 	"io/ioutil"
 	"net"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -167,6 +168,9 @@ func (b *Birc) Send(msg config.Message) (string, error) {
 	}
 
 	var msgLines []string
+	// IRC can't render markdown links, keep the URL visible so clients can linkify it
+	msg.Text = replaceMarkdownLinks(msg.Text)
+
 	if b.GetBool("StripMarkdown") {
 		msg.Text = stripmd.Strip(msg.Text)
 	}
@@ -186,6 +190,13 @@ func (b *Birc) Send(msg config.Message) (string, error) {
 		b.Local <- msg
 	}
 	return "", nil
+}
+
+var markdownLinkRE = regexp.MustCompile(`\[([^\[\]]+)\]\(((?:https?|ftp)://[^\s()]+)\)`)
+
+// replaceMarkdownLinks converts [label](url) into "label <url>".
+func replaceMarkdownLinks(text string) string {
+	return markdownLinkRE.ReplaceAllString(text, "${1} <${2}>")
 }
 
 func (b *Birc) doConnect() {

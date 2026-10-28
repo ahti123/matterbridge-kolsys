@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"github.com/42wim/matterbridge/bridge/config"
 	"github.com/42wim/matterbridge/bridge/helper"
@@ -225,18 +226,13 @@ func (b *Birc) handlePrivMsg(client *girc.Client, event girc.Event) {
 	mycharset := b.GetString("Charset")
 	if mycharset == "" {
 		// detect what were sending so that we convert it to utf-8
-		detector := chardet.NewTextDetector()
-		result, err := detector.DetectBest([]byte(rmsg.Text))
+		detected, confidence, err := detectCharset(rmsg.Text)
 		if err != nil {
 			b.Log.Infof("detection failed for rmsg.Text: %#v", rmsg.Text)
 			return
 		}
-		b.Log.Debugf("detected %s confidence %#v", result.Charset, result.Confidence)
-		mycharset = result.Charset
-		// if we're not sure, just pick ISO-8859-1
-		if result.Confidence < 80 {
-			mycharset = "ISO-8859-1"
-		}
+		b.Log.Debugf("detected %s confidence %#v", detected, confidence)
+		mycharset = detected
 	}
 	switch mycharset {
 	case "gbk", "gb18030", "gb2312", "big5", "euc-kr", "euc-jp", "shift-jis", "iso-2022-jp":
@@ -253,6 +249,24 @@ func (b *Birc) handlePrivMsg(client *girc.Client, event girc.Event) {
 
 	b.Log.Debugf("<= Sending message from %s on %s to gateway", event.Params[0], b.Account)
 	b.Remote <- rmsg
+}
+
+// detectCharset guesses the charset of an incoming message. Valid UTF-8 is taken
+// as UTF-8 without asking chardet, which is unreliable on short texts: it took
+// the UTF-8 "ÕIGE!" for windows-1252 and it ended up as "Ã•IGE!".
+func detectCharset(text string) (string, int, error) {
+	if utf8.ValidString(text) {
+		return "UTF-8", 100, nil
+	}
+	result, err := chardet.NewTextDetector().DetectBest([]byte(text))
+	if err != nil {
+		return "", 0, err
+	}
+	// if we're not sure, just pick ISO-8859-1
+	if result.Confidence < 80 {
+		return "ISO-8859-1", result.Confidence, nil
+	}
+	return result.Charset, result.Confidence, nil
 }
 
 func (b *Birc) handleRunCommands() {

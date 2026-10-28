@@ -21,3 +21,21 @@ func TestReplaceMarkdownLinks(t *testing.T) {
 		assert.Equalf(t, tc.wantOutput, replaceMarkdownLinks(tc.input), "This testcase failed: %s", name)
 	}
 }
+
+func TestDetectCharset(t *testing.T) {
+	testcases := map[string]struct {
+		input       string
+		wantCharset string
+	}{
+		"short utf-8": {"ÕIGE!", "UTF-8"},
+		"utf-8 word":  {"õige", "UTF-8"},
+		"long utf-8":  {"seni nagu ju see ikka õige olnud?", "UTF-8"},
+		"ascii":       {"plain text", "UTF-8"},
+		"latin-1 Õ":   {"\xd5IGE!", "ISO-8859-1"},
+	}
+	for name, tc := range testcases {
+		charset, _, err := detectCharset(tc.input)
+		assert.NoErrorf(t, err, "This testcase failed: %s", name)
+		assert.Equalf(t, tc.wantCharset, charset, "This testcase failed: %s", name)
+	}
+}
